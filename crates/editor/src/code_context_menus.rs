@@ -594,7 +594,21 @@ impl CompletionsMenu {
                                             }
                                         }))
                                         .start_slot::<Div>(color_swatch)
-                                        .child(h_flex().overflow_hidden().child(completion_label))
+                                        .child(
+                                            h_flex()
+    .overflow_hidden()
+    .child(
+        completion_label
+            .single_line()
+            .text_ellipsis()
+            .tooltip(completion_label.text().to_string())
+            .on_hover(|this| {
+                this.cursor(CursorStyle::Help) // Change cursor to a question mark
+            .text_decoration(TextDecoration::Underline)
+            .color(Color::Accent)
+            })
+        )
+)
                                         .end_slot::<Label>(documentation_label),
                                 )
                             }
